@@ -22,13 +22,13 @@ script:
   - mkdir -p ${RELEASE_DIR_DARWIN}
   - cp release/mongodb_exporter-darwin-amd64 ${RELEASE_DIR_DARWIN}/mongodb_exporter
   - cp LICENSE README.md ${RELEASE_DIR_DARWIN}
-  - tar -cvzf mongodb_exporter-${TRAVIS_BRANCH}-darwin-amd64.tar.gz --directory release ${DIR_DARWIN}/*
+  - tar -cvzf mongodb_exporter-${TRAVIS_BRANCH}-darwin-amd64.tar.gz --directory release ${RELEASE_DIR_DARWIN}/*
 
   # LINUX
   - mkdir -p ${RELEASE_DIR_LINUX}
   - cp release/mongodb_exporter-linux-amd64 ${RELEASE_DIR_LINUX}/mongodb_exporter
   - cp LICENSE README.md ${RELEASE_DIR_LINUX}
-  - tar -cvzf mongodb_exporter-${TRAVIS_BRANCH}-linux-amd64.tar.gz --directory release ${DIR_LINUX}/*
+  - tar -cvzf mongodb_exporter-${TRAVIS_BRANCH}-linux-amd64.tar.gz --directory release ${RELEASE_DIR_LINUX}/*
 
 
 deploy:
