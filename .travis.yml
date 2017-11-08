@@ -7,6 +7,9 @@ branches:
     - master
     - /^v\d+(\.\d+)+$/
 
+env:
+  - RELEASE_DIR_DARWIN=release/mongodb_exporter-${TRAVIS_BRANCH}.darwin-amd64
+  - RELEASE_DIR_LINUX=release/mongodb_exporter-${TRAVIS_BRANCH}.linux-amd64
 
 before_install:
   - sudo apt-get install curl git make perl
@@ -15,17 +18,27 @@ before_install:
 
 script:
   - make release
-  - cp LICENSE README.md release/
-  - tar -cvzf mongodb_exporter-darwin-amd64.tar.gz --directory release mongodb_exporter-darwin-amd64 LICENSE README.md
-  - tar -cvzf mongodb_exporter-linux-amd64.tar.gz --directory release mongodb_exporter-linux-amd64 LICENSE README.md
+
+  # DARWIN
+  - mkdir -p ${RELEASE_DIR_DARWIN}
+  - cp release/mongodb_exporter-darwin-amd64 ${RELEASE_DIR_DARWIN}/mongodb_exporter
+  - cp LICENSE README.md ${RELEASE_DIR_DARWIN}
+  - tar -cvzf mongodb_exporter-${TRAVIS_BRANCH}-darwin-amd64.tar.gz --directory ${RELEASE_DIR_DARWIN} .
+
+  # LINUX
+  - mkdir -p ${RELEASE_DIR_LINUX}
+  - cp release/mongodb_exporter-linux-amd64 ${RELEASE_DIR_LINUX}/mongodb_exporter
+  - cp LICENSE README.md ${RELEASE_DIR_LINUX}
+  - tar -cvzf mongodb_exporter-${TRAVIS_BRANCH}-linux-amd64.tar.gz --directory ${RELEASE_DIR_LINUX} .
+
 
 deploy:
   provider: releases
   api_key:
     secure: TXU6KUz/gGU0wC+N65y70m+0v4bvhOjQ3vKVIBd6+c18DKQyn0u9B308CplF73ppGN861WkR2ZbVFoskau8QVdyKt/Dg4gg8HuaM9Tc6VcEo5cmbNxd1L/nRHPCkXJ8Dk5rafOIk6RTrNuYeUWTCIRdOQXAyrNH/DfQ3AdQB4lWe2dDWIA35TsGzGPle91mpBU6Cj3uFICalgxM8RFQ45rB4PqNtMfPa9HBS/QwSksI1is9nzAFZtQFXOv4ZA1Stvh18SegN7NhrzzZX6L7e5HlvXV5vZ9A/pnrj2RIlvVhW53uTBVqtXzbas36hNmvX9K4yC3cP2GQse0O+UCJ4B6fMJU6EqcXUzuMEMwlVfkkXtaW2v5BppHVy4tuaHs99FTeR9JiDLBQQxKYXd/6UEnjMmlQsqSMeq8TGrtpredmUuS0asc1yQ2eKDYzFcsmu8kDoILSEokFUxr5aKOL4VMffsNN+wA4IdIXTA13MSzGt2tZnr8bUNhh6pEp5lLGQFqR03+fk/ecwj+/TTOMjppGJarzBwi7XQpCcw/uX1jxgvwLw809dOeG+2RxzVoln0gLVgOwOJMbSglGb6SzRZqG5wsfkVEz3ma1P8I8tL5YPDq0hOYF/hVuETWs1IuplBR3zvAEamn9MeLpUbkcwvfhs18nt3oQj14BGRN/sYhc=
   file:
-    - mongodb_exporter-darwin-amd64.tar.gz
-    - mongodb_exporter-linux-amd64.tar.gz
+    - mongodb_exporter-${TRAVIS_BRANCH}-darwin-amd64.tar.gz
+    - mongodb_exporter-${TRAVIS_BRANCH}-linux-amd64.tar.gz
   skip_cleanup: true
   on:
     tags: true
