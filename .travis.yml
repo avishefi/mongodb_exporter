@@ -5,6 +5,7 @@ go:
 branches:
   only:
     - master
+    - /^v\d+(\.\d+)+$/
 
 
 before_install:
