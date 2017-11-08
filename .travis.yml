@@ -8,8 +8,7 @@ branches:
     - /^v\d+(\.\d+)+$/
 
 env:
-  - RELEASE_DIR_DARWIN=release/mongodb_exporter-${TRAVIS_BRANCH}.darwin-amd64
-  - RELEASE_DIR_LINUX=release/mongodb_exporter-${TRAVIS_BRANCH}.linux-amd64
+  - RELEASE_DIR_DARWIN=release/mongodb_exporter-${TRAVIS_BRANCH}.darwin-amd64 RELEASE_DIR_LINUX=release/mongodb_exporter-${TRAVIS_BRANCH}.linux-amd64
 
 before_install:
   - sudo apt-get install curl git make perl
