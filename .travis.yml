@@ -1,6 +1,6 @@
 language: go
 go:
-  - 1.6
+  - 1.9.2
 
 branches:
   only:
@@ -34,17 +34,6 @@ script:
 
     tarRelease ${DIR_DARWIN} mongodb_exporter-darwin-amd64 darwin-amd64
     tarRelease ${DIR_LINUX} mongodb_exporter-linux-amd64 linux-amd64
-  # DARWIN
-  # - mkdir -p ${RELEASE_DIR_DARWIN}
-  # - cp release/mongodb_exporter-darwin-amd64 ${RELEASE_DIR_DARWIN}/mongodb_exporter
-  # - cp LICENSE README.md ${RELEASE_DIR_DARWIN}
-  # - ( cd release && tar -cvzf mongodb_exporter-${TRAVIS_BRANCH}-darwin-amd64.tar.gz ${DIR_DARWIN}/* )
-
-  # # LINUX
-  # - mkdir -p ${RELEASE_DIR_LINUX}
-  # - cp release/mongodb_exporter-linux-amd64 ${RELEASE_DIR_LINUX}/mongodb_exporter
-  # - cp LICENSE README.md ${RELEASE_DIR_LINUX}
-  # - ( cd release && tar -cvzf mongodb_exporter-${TRAVIS_BRANCH}-linux-amd64.tar.gz ${DIR_LINUX}/* )
 
 
 deploy:
@@ -57,4 +46,3 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
-
