@@ -1,0 +1,26 @@
+language: go
+go: 
+ - 1.5.1
+
+branches:
+  only:
+    - master
+    - travisci
+
+before_install:
+  - apt-get install curl git make perl
+  - curl -s https://glide.sh/get | sh
+
+script:
+ - make release
+ - tar -cvzf mongodb_exporter-darwin-amd64.tar.gz release/mongodb_exporter-darwin-amd64 LICENSE README.md
+ - tar -cvzf mongodb_exporter-linux-amd64.tar.gz release/mongodb_exporter-linux-amd64 LICENSE README.md
+
+
+# deploy:
+#   provider: releases
+#   api_key: "GITHUB OAUTH TOKEN"
+#   file: "mongodb_exporter-linux-amd64.tar.gz"
+#   skip_cleanup: true
+#   on:
+#     tags: true
