@@ -6,6 +6,7 @@ branches:
   only:
     - master
 
+
 before_install:
   - sudo apt-get install curl git make perl
   - git clone https://github.com/dcu/mongodb_exporter.git $GOPATH/src/github.com/dcu/mongodb_exporter
@@ -26,3 +27,4 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
+
