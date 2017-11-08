@@ -1,4 +1,4 @@
-package = github.com/dcu/mongodb_exporter
+package = github.com/avishefi/mongodb_exporter
 TAG := $(shell git tag | sort -r | head -n 1)
 
 test:
