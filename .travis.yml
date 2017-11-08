@@ -15,8 +15,9 @@ before_install:
 
 script:
   - make release
-  - tar -cvzf mongodb_exporter-darwin-amd64.tar.gz release/mongodb_exporter-darwin-amd64 LICENSE README.md
-  - tar -cvzf mongodb_exporter-linux-amd64.tar.gz release/mongodb_exporter-linux-amd64 LICENSE README.md
+  - cp LICENSE README.md release/
+  - tar -cvzf mongodb_exporter-darwin-amd64.tar.gz --directory release mongodb_exporter-darwin-amd64 LICENSE README.md
+  - tar -cvzf mongodb_exporter-linux-amd64.tar.gz --directory release mongodb_exporter-linux-amd64 LICENSE README.md
 
 deploy:
   provider: releases
