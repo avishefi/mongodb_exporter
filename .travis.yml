@@ -8,7 +8,7 @@ branches:
     - travisci
 
 before_install:
-  - apt-get install curl git make perl
+  - sudo apt-get install curl git make perl
   - curl -s https://glide.sh/get | sh
 
 script:
