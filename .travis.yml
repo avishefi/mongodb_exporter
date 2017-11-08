@@ -8,7 +8,7 @@ branches:
     - /^v\d+(\.\d+)+$/
 
 env:
-  - RELEASE_DIR_DARWIN=release/mongodb_exporter-${TRAVIS_BRANCH}.darwin-amd64 RELEASE_DIR_LINUX=release/mongodb_exporter-${TRAVIS_BRANCH}.linux-amd64
+  - DIR_DARWIN=mongodb_exporter-${TRAVIS_BRANCH}.darwin-amd64 RELEASE_DIR_DARWIN=release/${DIR_DARWIN} DIR_LINUX=mongodb_exporter-${TRAVIS_BRANCH}.linux-amd64 RELEASE_DIR_LINUX=release/${DIR_LINUX}
 
 before_install:
   - sudo apt-get install curl git make perl
@@ -22,13 +22,13 @@ script:
   - mkdir -p ${RELEASE_DIR_DARWIN}
   - cp release/mongodb_exporter-darwin-amd64 ${RELEASE_DIR_DARWIN}/mongodb_exporter
   - cp LICENSE README.md ${RELEASE_DIR_DARWIN}
-  - tar -cvzf mongodb_exporter-${TRAVIS_BRANCH}-darwin-amd64.tar.gz ${RELEASE_DIR_DARWIN}/*
+  - tar -cvzf mongodb_exporter-${TRAVIS_BRANCH}-darwin-amd64.tar.gz --directory release ${DIR_DARWIN}/*
 
   # LINUX
   - mkdir -p ${RELEASE_DIR_LINUX}
   - cp release/mongodb_exporter-linux-amd64 ${RELEASE_DIR_LINUX}/mongodb_exporter
   - cp LICENSE README.md ${RELEASE_DIR_LINUX}
-  - tar -cvzf mongodb_exporter-${TRAVIS_BRANCH}-linux-amd64.tar.gz ${RELEASE_DIR_LINUX}/*
+  - tar -cvzf mongodb_exporter-${TRAVIS_BRANCH}-linux-amd64.tar.gz --directory release ${DIR_LINUX}/*
 
 
 deploy:
